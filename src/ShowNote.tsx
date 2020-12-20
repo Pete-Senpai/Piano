@@ -4,19 +4,21 @@ import React from 'react';
   }
 
   interface MyState {
-    key: string;
+    keys: Array<string>;
   }
 
 export class ShowNote extends React.Component<MyProps, MyState> {
   constructor(props: string){
     super(props);
-    this.state = {key: ""};
+    this.state = {keys: [""]};
   }
   handleKeyDown = (key: string) => {
-    this.setState({key});
+    this.state.keys.push(key);
+    this.setState({keys: this.state.keys});
   }
   handleKeyUp = () => {
-    this.setState({key: ""});
+    this.state.keys.pop();
+    this.setState({keys: this.state.keys});
   }
   componentDidMount() {
     document.addEventListener("keydown",(e: KeyboardEvent) => this.handleKeyDown(e.key));
@@ -27,6 +29,6 @@ export class ShowNote extends React.Component<MyProps, MyState> {
     document.removeEventListener("keyup",this.handleKeyUp);
   }
   render() {
-    return <div>{this.state.key}</div>;
+    return <div>{this.state.keys}</div>;
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { notes } from './notes';
   interface MyProps {
     
   }
@@ -12,15 +13,19 @@ export class ShowNote extends React.Component<MyProps, MyState> {
     super(props);
     this.state = {keys: []};
   }
-  handleKeyDown = (key: string) => {
-    let alreadyExists = this.state.keys.some(x => x === key);
+  
+  handleKeyDown = (key: any) => {
+    console.log(notes[key]);
+    let alreadyExists = this.state.keys.some(x => x === notes[key]);
     if(!alreadyExists) {
-      this.setState({keys: [...this.state.keys, key]});
+      this.setState({keys: [...this.state.keys, notes[key]]});
     };
-    
+
   }
+
   handleKeyUp = (key: string) => {
-    let index = this.state.keys.findIndex(x => x === key);
+    //look into filter
+    let index = this.state.keys.findIndex(x => x === notes[key]);
     this.setState({keys: [...this.state.keys.slice(0, index), ...this.state.keys.slice(index + 1,this.state.keys.length)]});
   }
   componentDidMount() {

@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Piano from './Piano';
-import {ShowNote} from './ShowNote';
 
 const App: React.FC = () => {
   return (
